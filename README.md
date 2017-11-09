@@ -19,7 +19,7 @@ Run `sudo apt-get update`
 
 Run `sudo apt-get install mysql-server`
 
-Edit `etc/mysql/my.cnf`
+Edit `/etc/mysql/mysql.conf.d/mysqld.cnf`
 
 Set `bind-address = 0.0.0.0`
 
@@ -29,7 +29,7 @@ Run `mysql -u root -p`
 
 Execute the following queries:
 
-`GRANT ALL ON *.* to 'root'@'%' IDENTIFIED BY 'cdc';`
+`GRANT ALL ON *.* to 'cdc'@'%' IDENTIFIED BY 'cdc';`
 
 `FLUSH PRIVILEGES;`
 
@@ -39,31 +39,13 @@ Checkout application source
 
 Run `sudo apt-get install git`
 
-Run `git clone https://github.com/ISEAGE-ISU/itocdc-2015-www.git`
+Run `git clone https://github.com/micahvandeusen/CompletelyDigitalClips.git`
 
 Run database deployment script
 
-`cd itocdc-2015-www.git`
+`cd CompletelyDigitalClips`
 
 `./create_application_database.sh`
-
-To optionally [install phpMyAdmin](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-12-04) perform the following:
-
-Run `sudo apt-get install apache2`
-
-Run `sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt php5-mysql libapache2-mod-auth-mysql`
-
-Run `sudo apt-get install phpmyadmin apache2-utils`
-
-Edit `/etc/apache2/apache2.conf`
-
-Add `Include /etc/phpmyadmin/apache.conf` at the end of the file.
-
-Run `sudo service apache2 restart`
-
-Check that you can access [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
-
-## Setup Application Servers
 
 For each application server perform the following:
 
@@ -73,9 +55,9 @@ Run `sudo apt-get install git`
 
 Run `sudo apt-get install apache2`
 
-Run `sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt php5-mysql libapache2-mod-auth-mysql`
+Run `sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql libapache2-mod-auth-mysql`
 
-Edit `/etc/php5/apache2/php.ini`
+Edit `/etc/php7/apache2/php.ini`
 
 Set `file_uploads = On`
 
@@ -85,15 +67,13 @@ Set `post_max_size = 100M`
 
 Run `sudo service apache2 restart`
 
-Run `sudo apt-get install ffmpeg`
-
 Checkout application source
 
-`git clone https://github.com/ISEAGE-ISU/itocdc-2015-www.git`
+`git clone https://github.com/micahvandeusen/CompletelyDigitalClips.git`
 
 Run application deployment script
 
-`cd itocdc-2015-www.git`
+`cd CompletelyDigitalClips`
 
 `./deploy_application_server.sh`
 
