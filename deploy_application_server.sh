@@ -57,11 +57,11 @@ rm Application/config.php
 mv config_template Application/config.php
 
 # copy and replace the file contents of the application source to the webserver directory
-sudo rm -rf /var/www/*
-sudo cp -a Application/. /var/www/
+sudo rm -rf /var/www/html/*
+sudo cp -a Application/. /var/www/html/
 
-sudo chmod -R 0755 /var/www/media
-sudo chown www-data:www-data /var/www/media
+sudo chmod -R 0755 /var/www/html/media
+sudo chown www-data:www-data /var/www/html/media
 
 # all done
 printf "\nFinished.\n"
