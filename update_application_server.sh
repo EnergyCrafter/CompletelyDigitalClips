@@ -15,27 +15,27 @@ git clean -x -f
 tmpdir=`mktemp -d`
 
 # purge index.html in media directory
-sudo rm /var/www/media/index.html
+sudo rm /var/www/html/media/index.html
 
 # backup media directory and config.php file
-sudo cp -a -n /var/www/media/. $tmpdir/
-sudo cp -a -n /var/www/config.php $tmpdir/
+sudo cp -a -n /var/www/html/media/. $tmpdir/
+sudo cp -a -n /var/www/html/config.php $tmpdir/
 
 # purge www 
-sudo rm -rf /var/www/*
+sudo rm -rf /var/www/html/*
 
 # copy update application files to www
-sudo cp -a -n Application/. /var/www/
+sudo cp -a -n Application/. /var/www/html/
 
 # restore config file
-sudo mv $tmpdir/config.php /var/www/config.php
+sudo mv $tmpdir/config.php /var/www/html/config.php
 
 # restore media directory contents
-sudo cp -a -n $tmpdir/. /var/www/media/
+sudo cp -a -n $tmpdir/. /var/www/html/media/
 
 # reset check permissions
-sudo chmod -R 0755 /var/www/media
-sudo chown www-data:www-data /var/www/media
+sudo chmod -R 0755 /var/www/html/media
+sudo chown www-data:www-data /var/www/html/media
 
 # all done
 printf "\nFinished.\n"
