@@ -11,12 +11,12 @@ $shortname = $_GET["video"];
 
 try {
     // get clip properties
-    $clipResult = mysql_query("SELECT host, title, description, posted, user, views, extension FROM clips WHERE shortname='" . $shortname . "'");
+    $clipResult = mysqli_query($conn, "SELECT host, title, description, posted, user, views, extension FROM clips WHERE shortname='" . $shortname . "'");
 
-    if(mysql_num_rows($clipResult) == 0){
+    if(mysqli_num_rows($clipResult) == 0){
         $clip = NULL;
     } else {
-        $clipRow = mysql_fetch_row($clipResult);
+        $clipRow = mysqli_fetch_row($clipResult);
         $host = $clipRow[0];
         $shareURL = "http://$WEBSITE_DOMAIN_NAME/view.php?video=$shortname";
         $title = $clipRow[1];
@@ -27,17 +27,17 @@ try {
         $extension = $clipRow[6];
 
         // get username
-        $userResult = mysql_query("SELECT username FROM users WHERE id='" . $userID . "'");
-        $userRow = mysql_fetch_row($userResult);
+        $userResult = mysqli_query($conn, "SELECT username FROM users WHERE id='" . $userID . "'");
+        $userRow = mysqli_fetch_row($userResult);
         $username = $userRow[0];
 
         // set the clip the filename
         $clip = "$shortname.$extension";
 
         // update view counter
-        mysql_query("UPDATE clips SET views=views+1 WHERE shortname='" . $shortname . "'");
+        mysqli_query($conn, "UPDATE clips SET views=views+1 WHERE shortname='" . $shortname . "'");
     }
-    
+
   } catch (Exception $e) {
     $clip = NULL;
   }
@@ -93,7 +93,7 @@ try {
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="/index.php">Home</a></li>
-                <?php if(isset($_COOKIE["PHPSESSID"])): ?> 
+                <?php if(isset($_COOKIE["PHPSESSID"])): ?>
                   <li><a href="/post.php">Post Video</a></li>
                   <li><a href="/logout.php">Logout</a></li>
                 <?php else: ?>
@@ -128,7 +128,7 @@ try {
 	    $(document).ready(function() {
 		var v = document.getElementsByTagName("video")[0];
 		new MediaElement(v, {success: function(media) {
-                    <?php 
+                    <?php
                       if(isset($_GET["t"])){
                         $seconds = $_GET["t"];
                         echo "media.setCurrentTime($seconds);";
@@ -151,4 +151,3 @@ try {
     </div>
   </body>
 </html>
-

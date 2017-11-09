@@ -13,7 +13,7 @@ $password=$_POST["password"];
 include 'opendb.php';
 
 // get user data from the users table
-$result = mysql_query("INSERT INTO users (email, username, password) VALUES ('$email', '$username', '$password')");
+$result = mysqli_query($conn, "INSERT INTO users (email, username, password) VALUES ('$email', '$username', '$password')");
 
 // register user
 if ($result) {
@@ -22,7 +22,7 @@ if ($result) {
     setcookie("user", $email, time()+3600);
     header('Location: /index.php');
 } else {
-    header('Location: /registration.php?message=' . urlencode(mysql_error($conn)));
+    header('Location: /registration.php?message=' . urlencode(mysqli_error($conn)));
 }
 
 // close connection to the database

@@ -11,16 +11,16 @@
 
   try {
     // get clip properties
-    $userResult = mysql_query("SELECT id, email FROM users WHERE username='" . $username . "'");
+    $userResult = mysqli_query($conn, "SELECT id, email FROM users WHERE username='" . $username . "'");
 
-    if(mysql_num_rows($userResult) == 0){
+    if(mysqli_num_rows($userResult) == 0){
         $userID = NULL;
     } else {
-        $userRow = mysql_fetch_row($userResult);
+        $userRow = mysqli_fetch_row($userResult);
         $userID = $userRow[0];
         $email = $userRow[1];
     }
-    
+
   } catch (Exception $e) {
     $userID = NULL;
   }
@@ -76,7 +76,7 @@
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="/index.php">Home</a></li>
-                <?php if(isset($_COOKIE["PHPSESSID"])): ?> 
+                <?php if(isset($_COOKIE["PHPSESSID"])): ?>
                   <li><a href="/post.php">Post Video</a></li>
                   <li><a href="/logout.php">Logout</a></li>
                 <?php else: ?>
@@ -102,9 +102,9 @@
         if($userID){
           echo "<h1>User Videos</h1>";
           // get user videos
-          $clipsResult = mysql_query("SELECT host, title, shortname, posted, views FROM clips WHERE user='" . $userID . "' ORDER BY views DESC, posted DESC");
+          $clipsResult = mysqli_query($conn, "SELECT host, title, shortname, posted, views FROM clips WHERE user='" . $userID . "' ORDER BY views DESC, posted DESC");
           $postedClips = FALSE;
-          while($clipsRow = mysql_fetch_row($clipsResult)){
+          while($clipsRow = mysqli_fetch_row($clipsResult)){
             $postedClips = TRUE;
             $host = $clipsRow[0];
             $title = $clipsRow[1];
@@ -132,4 +132,3 @@
     </div>
   </body>
 </html>
-

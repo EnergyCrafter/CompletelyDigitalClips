@@ -12,10 +12,10 @@ include 'config.php';
 include 'opendb.php';
 
 // get user data from the users table (assumes users table already exists!)
-$result = mysql_query("SELECT * FROM users WHERE email='" . $email . "'" . " AND password=" . "'" . $password . "'");
+$result = mysqli_query($conn, "SELECT * FROM users WHERE email='" . $email . "'" . " AND password=" . "'" . $password . "'");
 
 // authenticate user
-$login = mysql_num_rows($result) > 0;
+$login = mysqli_num_rows($result) > 0;
 
 if($login){
   // set an active cookie for this username

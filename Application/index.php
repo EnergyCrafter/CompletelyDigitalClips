@@ -55,7 +55,7 @@
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="/index.php">Home</a></li>
-                <?php if(isset($_COOKIE["PHPSESSID"])): ?> 
+                <?php if(isset($_COOKIE["PHPSESSID"])): ?>
                   <li><a href="/post.php">Post Video</a></li>
                   <li><a href="/logout.php">Logout</a></li>
                 <?php else: ?>
@@ -80,11 +80,11 @@
 
         $N = 60;
         // get top N trending videos
-        $clipsResult = mysql_query("SELECT host, title, shortname, posted, views FROM clips ORDER BY views DESC, posted DESC LIMIT $N");
-        if(mysql_num_rows($clipsResult) > 0){
+        $clipsResult = mysqli_query($conn, "SELECT host, title, shortname, posted, views FROM clips ORDER BY views DESC, posted DESC LIMIT $N");
+        if(mysqli_num_rows($clipsResult) > 0){
           $counter = 1;
           echo "<tr>";
-          while($clipsRow = mysql_fetch_row($clipsResult)){
+          while($clipsRow = mysqli_fetch_row($clipsResult)){
             $host = $clipsRow[0];
             $title = $clipsRow[1];
             $shortname = $clipsRow[2];
@@ -114,4 +114,3 @@
     </div>
   </body>
 </html>
-

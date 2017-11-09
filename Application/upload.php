@@ -60,7 +60,7 @@ if ($_FILES["video"]["error"] == UPLOAD_ERR_OK) {
   shell_exec("ffmpeg -i \"$uploadDir/$filename\" -ss 00:00:04 -f image2 -s qvga \"$uploadDir/$shortname.png\"");
 
   // rename file upload to shortname
-  rename("$uploadDir/$filename", "$uploadDir/$shortname.$extension"); 
+  rename("$uploadDir/$filename", "$uploadDir/$shortname.$extension");
 
   // save input fields
   $title = $_POST["title"];
@@ -69,18 +69,18 @@ if ($_FILES["video"]["error"] == UPLOAD_ERR_OK) {
   // check user authentication
   if(isset($_COOKIE["PHPSESSID"]) && isset($_COOKIE["user"])){
     try {
-      $userResult = mysql_query("SELECT id FROM users WHERE email='" . $_COOKIE["user"] . "'");
-      $userRow = mysql_fetch_row($userResult);
+      $userResult = mysqli_query($conn, "SELECT id FROM users WHERE email='" . $_COOKIE["user"] . "'");
+      $userRow = mysqli_fetch_row($userResult);
       $userID = $userRow[0];
 
       // insert video into clips table
-      $insertResult = mysql_query("INSERT INTO clips (host, shortname, title, description, user, extension) VALUES ('$APPLICATION_HOSTNAME', '$shortname', '$title', '$description', '$userID', '$extension')");
+      $insertResult = mysqli_query($conn, "INSERT INTO clips (host, shortname, title, description, user, extension) VALUES ('$APPLICATION_HOSTNAME', '$shortname', '$title', '$description', '$userID', '$extension')");
       if ($insertResult) {
         // success! view the video
         header("Location: /view.php?video=" . $shortname);
         exit();
       } else {
-        header('Location: /post.php?message=' . urlencode(mysql_error($conn)));
+        header('Location: /post.php?message=' . urlencode(mysqli_error($conn)));
         exit();
       }
     } catch (Exception $e) {
@@ -97,4 +97,3 @@ if ($_FILES["video"]["error"] == UPLOAD_ERR_OK) {
   exit();
 }
 ?>
-
