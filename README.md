@@ -47,7 +47,7 @@ Run database deployment script
 
 `./create_application_database.sh`
 
-For each application server perform the following:
+## Setup Application Servers
 
 Run `sudo apt-get update`
 
@@ -57,7 +57,7 @@ Run `sudo apt-get install apache2`
 
 Run `sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql libapache2-mod-auth-mysql`
 
-Edit `/etc/php7/apache2/php.ini`
+Edit `/etc/php/7.0/apache2/php.ini`
 
 Set `file_uploads = On`
 
