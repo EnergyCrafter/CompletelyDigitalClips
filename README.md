@@ -55,7 +55,7 @@ Run `sudo apt-get install git`
 
 Run `sudo apt-get install apache2`
 
-Run `sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql libapache2-mod-auth-mysql`
+Run `sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql`
 
 Edit `/etc/php/7.0/apache2/php.ini`
 
