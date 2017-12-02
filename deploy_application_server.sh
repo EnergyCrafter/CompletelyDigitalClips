@@ -5,7 +5,7 @@ clear
 
 # reset any changes in the git repo to head of master and remove untracked files and pull updates from master repo
 echo "Resetting source repository..."
-git pull https://github.com/benjholla/CompletelyDigitalClips.git master &> /dev/null
+git pull https://github.com/EnergyCrafter/CompletelyDigitalClips.git master &> /dev/null
 git pull origin master
 git reset --hard
 git clean -x -f
